@@ -1,0 +1,72 @@
+﻿<Window x:Class="_19._01._01_заказ_д._Пушкина.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_19._01._01_заказ_д._Пушкина"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="610">
+    <Grid  Background="BlanchedAlmond">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        
+        
+        <TextBlock Text="Учёт" FontSize="23" Grid.Row="0" Grid.Column="0" 
+                   Width="Auto" TextAlignment="Center"/>
+        <TextBlock Text="Анализ"  FontSize="23" Grid.Row="0" Grid.Column="1"  
+                   Width="Auto" TextAlignment="Center"/>
+        
+        
+        <ListView  Grid.Column="0" Grid.Row="1"
+                   ItemsSource="{Binding Accountings}"
+                   SelectedItem="{Binding SelectedAccounting}" Height="350" Padding="5">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="добавить" Command="{Binding AddAccounting}" />
+                    <MenuItem Header="редактировать" Command="{Binding EditAccounting}"  />
+                    <MenuItem Header="удалить" Command="{Binding DeleteAccounting}" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Кабинет" Width="60"
+                                    DisplayMemberBinding="{Binding NumberCabinet}"/>
+                    <GridViewColumn Header="Нужно заказать" Width="250" 
+                                    DisplayMemberBinding="{Binding Detail}"/>
+                    <GridViewColumn Header="Цена" Width="70" 
+                                    DisplayMemberBinding="{Binding Price}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!--<ListBox ItemsSource="{Binding Details}" DisplayMemberPath="Details"/>-->
+        
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Button Content="Считать" Background="#ADD4E5" Grid.Column="1" Grid.Row="1" 
+                    Width="Auto" Command="{Binding CountAccounting}" Padding="5"/>
+            <TextBlock Text="Наиболее затратные : " Padding="5"/>
+            <ListView  ItemsSource="{Binding AccountingsCollectionCount}" Padding="5">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Кабинет" Width="Auto" 
+                                        DisplayMemberBinding="{Binding NumberCabinet}"/>
+                        <GridViewColumn Header="Деталь" Width="Auto" 
+                                        DisplayMemberBinding="{Binding Detail}"/>
+                        <GridViewColumn Header="Цена" Width="Auto" 
+                                        DisplayMemberBinding="{Binding Price}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <TextBlock Text="Общая цена всех деталей : " Padding="5"/>
+            <TextBlock Background="White" Text="{Binding Summ}" Padding="5"/>
+
+        </StackPanel>
+    </Grid>
+</Window>
